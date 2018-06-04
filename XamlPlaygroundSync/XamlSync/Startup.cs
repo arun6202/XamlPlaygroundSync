@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using XamlSync.Hubs;
 
 namespace XamlSync
 {
@@ -29,22 +30,36 @@ namespace XamlSync
 
 			// add swagger UI
 
+			services.AddSignalR();
+
+            services.AddCors(o =>
+            {
+                o.AddPolicy("Everything", p =>
+                {
+                    p.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+			app.UseFileServer();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseCors("Everything");
+
+            app.UseSignalR(routes =>
+            {
+				routes.MapHub<XamlPlaygroundSyncHub>("XamlPlaygroundSync");
+            });
         }
     }
 }
