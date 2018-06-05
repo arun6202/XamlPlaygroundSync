@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using XamarinFormsStarterKit.UserInterfaceBuilder.Models;
+using XamlSync.Controllers;
 using XamlSync.Hubs;
 
 namespace XamlSync
@@ -44,7 +45,7 @@ namespace XamlSync
 					   Console.WriteLine(DateTime.Now);
 					   if (HubContext != null)
 					   {
-							await HubContext.Clients.All.SendAsync("XamlPlaygroundSync", "sender" + new Random().Next().ToString(), new XamlPayload { XAML = DateTime.Now.ToString(), PreserveXML = DateTime.Now.ToString() });
+							await HubContext.Clients.All.SendAsync("XamlPlaygroundSync", "UpdateSimulatorsAsync", XamlPlaygroundSyncController.XamlPayload);
 
 					   }
 

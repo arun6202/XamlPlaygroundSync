@@ -11,7 +11,7 @@ namespace XamlSync.Controllers
 	[Route("api/[controller]")]
 	public class XamlPlaygroundSyncController : Controller
 	{
-		private static XamlPayload XamlPayload = new XamlPayload();
+		public static XamlPayload XamlPayload = new XamlPayload();
 
 		[HttpGet]
 		public XamlPayload Get()

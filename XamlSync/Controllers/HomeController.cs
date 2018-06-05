@@ -15,20 +15,15 @@ namespace XamlSync.Controllers
 	public class HomeController : Controller
 	{
 
-		IHubContext<XamlSyncHub> _hubContext;
-
 		public HomeController(IHubContext<XamlSyncHub> hubContext)
 		{
-			_hubContext = hubContext;
-
 			Program.HubContext = hubContext;
 		}
 
-		public async Task<IActionResult> Index()
-		{             
-			await _hubContext.Clients.All.SendAsync("XamlPlaygroundSync", "sender"+ new Random().Next().ToString(), new XamlPayload{XAML="te",PreserveXML="rerer"}); 
-            
-			return   View();
+		public IActionResult Index()
+		{
+
+			return View();
 		}
 
 		public IActionResult About()
