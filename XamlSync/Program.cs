@@ -42,7 +42,7 @@ namespace XamlSync
 				   while (true)
 				   {
 					   await Task.Delay(TimeSpan.FromSeconds(1));
-					   Console.WriteLine(DateTime.Now);
+
 					   if (HubContext != null)
 					   {
 							await HubContext.Clients.All.SendAsync("XamlPlaygroundSync", "UpdateSimulatorsAsync", XamlPlaygroundSyncController.XamlPayload);
