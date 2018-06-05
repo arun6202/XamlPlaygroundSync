@@ -7,6 +7,7 @@ namespace XamlSync.Hubs
 
 	public class XamlSyncHub : Hub
     {
+  
         public override Task OnConnectedAsync()
         {
             Clients.All.SendAsync("broadcastMessage", "system", $"{Context.ConnectionId} joined the conversation");

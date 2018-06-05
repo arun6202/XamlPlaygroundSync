@@ -19,7 +19,7 @@ namespace XamlPlaygroundConsume
 			await StartConnectionAsync();
 			_connection.On<string, XamlPayload>("XamlPlaygroundSync", (name, message) =>
             {
-				Console.WriteLine($"{name} said: {message.XAML} ,{message.PreserveXML}");
+				Console.WriteLine($"{name} said: {DateTime.Now.ToString()} ,{message.PreserveXML}");
             });
 
             Console.ReadLine();

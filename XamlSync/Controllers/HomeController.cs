@@ -20,6 +20,8 @@ namespace XamlSync.Controllers
 		public HomeController(IHubContext<XamlSyncHub> hubContext)
 		{
 			_hubContext = hubContext;
+
+			Program.HubContext = hubContext;
 		}
 
 		public async Task<IActionResult> Index()
