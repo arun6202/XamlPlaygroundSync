@@ -17,7 +17,7 @@ namespace XamlSync
 {
 	public class Program
 	{
-		private const string Urls = "http://localhost:6202";
+		private const string Url = "http://localhost:6202";
 
 
 		public static IHubContext<XamlSyncHub> HubContext;
@@ -65,7 +65,7 @@ namespace XamlSync
 				.UseConfiguration(new ConfigurationBuilder()
 				.AddCommandLine(args)
 				.Build())
-				.UseUrls(Urls)
+		           .UseUrls(Url)
 				.UseKestrel()
 				   .ConfigureLogging(factory =>
 				   {
