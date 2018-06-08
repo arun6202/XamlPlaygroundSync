@@ -1,1 +1,15 @@
-﻿
+﻿dotnet run --no-restore --no-dependencies --no-build  --verbosity m --project $HOME/XamlPlaygroundSync/XamlSync/XamlSync.csproj
+
+dotnet run --no-restore --no-dependencies --no-build  --verbosity m --project $HOME/XamlPlaygroundSync/XamlPlaygroundProduce/XamlPlaygroundProduce.csproj
+
+dotnet run --no-restore --no-dependencies --no-build  --verbosity m --project $HOME/XamlPlaygroundSync/XamlPlaygroundConsume/XamlPlaygroundConsume.csproj
+
+
+credits https://github.com/markvincze/rest-api-helpers
+
+curl -o /dev/null -s -w  http://localhost:6202/
+
+
+
+
+       
