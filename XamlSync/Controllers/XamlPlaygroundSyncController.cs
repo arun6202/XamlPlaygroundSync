@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using XamarinFormsStarterKit.UserInterfaceBuilder.Models;
-
+using XamlSync.Hubs;
 
 namespace XamlSync.Controllers
 {
@@ -12,6 +13,15 @@ namespace XamlSync.Controllers
 	public class XamlPlaygroundSyncController : Controller
 	{
 		public static XamlPayload XamlPayload = new XamlPayload();
+
+		public XamlPlaygroundSyncController(IHubContext<XamlSyncHub> hubContext)
+        {
+			if (Program.HubContext  ==null)
+			{
+				Program.HubContext = hubContext;
+
+			}
+        }
 
 		[HttpGet]
 		public XamlPayload Get()

@@ -17,7 +17,11 @@ namespace XamlSync.Controllers
 
 		public HomeController(IHubContext<XamlSyncHub> hubContext)
 		{
-			Program.HubContext = hubContext;
+			if (Program.HubContext == null)
+			{
+				Program.HubContext = hubContext;
+
+			}
 		}
 
 		public IActionResult Index()

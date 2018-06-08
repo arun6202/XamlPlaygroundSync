@@ -22,9 +22,21 @@ namespace XamlPlaygroundConsume
 			await StartConnectionAsync();
 
 			_connection.On<string, XamlPayload>("XamlPlaygroundSync", (name, message) =>
-            {
-                Console.WriteLine($"{name} said: {message.XAML} ,{message.PreserveXML}");
-            });
+			{
+ 
+				if (XamlPayload.XAML == null)
+				{
+					XamlPayload = message;
+					Console.WriteLine($"{name} said1: {XamlPayload.XAML} ,{XamlPayload.PreserveXML}");
+				}
+
+				bool areXamlSame = XamlPayload.CompareTo(message) == 0;
+				if (!areXamlSame)
+				{
+					XamlPayload = message;
+					Console.WriteLine($"{name} said2: {XamlPayload.XAML} ,{XamlPayload.PreserveXML}");
+				}
+			});
 
 			//_connection.On<string, XamlPayload>("XamlPlaygroundSync", (name, message) =>
 			//{
