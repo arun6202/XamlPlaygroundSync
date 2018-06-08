@@ -16,27 +16,42 @@ namespace XamlPlaygroundProduce
 
 		static async Task Main(string[] args)
 		{
-			while (true)
+			if (args.Length == 2)
 			{
-				var xamlPayload = new XamlPayload { PreserveXML = "PreserveXML" + new Random().Next().ToString(), XAML = "XAML" + new Random().Next().ToString() };
+				await PostUpdatedXaml(args[0], args[1]);
 
-				var json = JsonConvert.SerializeObject(xamlPayload);
-
-				Console.WriteLine($"XamlPlaygroundProduce sent: {xamlPayload.XAML} ,{xamlPayload.PreserveXML}");
-
-				var client = new HttpClient
+			}
+			else
+			{
+				while (true)
 				{
-					BaseAddress = new Uri(baseUri)
-				};
+					var preserveXML = "PreserveXML" + new Random().Next().ToString();
+					var xAML = "XAML" + new Random().Next().ToString();
+					await PostUpdatedXaml(preserveXML, xAML);
+					await Task.Delay(5000);
 
-				var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-
-				await client.PostAsync(baseUri, stringContent);
-
-				await Task.Delay(5000);
+				}
 			}
 
 		}
 
+		private static async Task PostUpdatedXaml(string preserveXML, string xAML)
+		{
+			var xamlPayload = new XamlPayload { PreserveXML = preserveXML, XAML = xAML };
+
+			var json = JsonConvert.SerializeObject(xamlPayload);
+
+			Console.WriteLine($"XamlPlaygroundProduce sent: {xamlPayload.XAML} ,{xamlPayload.PreserveXML}");
+
+			var client = new HttpClient
+			{
+				BaseAddress = new Uri(baseUri)
+			};
+
+			var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+			await client.PostAsync(baseUri, stringContent);
+
+		}
 	}
 }
